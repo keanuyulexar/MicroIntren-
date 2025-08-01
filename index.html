@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroIntern - Kickstart Your Tech Career</title>
+    <meta name="description" content="Connect with real companies, gain hands-on experience, and build your portfolio through bite-sized micro-internships. Perfect for junior developers and bootcamp graduates.">
+    <meta name="keywords" content="micro-internships, junior developers, tech careers, bootcamp graduates, freelance projects, portfolio building">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="logo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="16,18 22,12 16,6"></polyline>
+                        <polyline points="8,6 2,12 8,18"></polyline>
+                    </svg>
+                </div>
+                <span class="brand-text">MicroIntern</span>
+            </div>
+            
+            <div class="nav-menu">
+                <button class="nav-link" onclick="showPage('landing')">Home</button>
+                <button class="nav-link" onclick="showPage('internships')">Internships</button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="cta-button" onclick="showPage('signup')">Get Started</button>
+            </div>
+
+            <div class="mobile-menu-toggle">
+                <button class="theme-toggle mobile" onclick="toggleTheme()">
+                    <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="hamburger" onclick="toggleMobileMenu()">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="mobile-nav-link" onclick="showPage('landing'); toggleMobileMenu()">Home</button>
+            <button class="mobile-nav-link" onclick="showPage('internships'); toggleMobileMenu()">Internships</button>
+            <button class="mobile-cta-button" onclick="showPage('signup'); toggleMobileMenu()">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landingPage" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Kickstart your tech career 
+                        <span class="gradient-text">one micro-internship at a time</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Connect with real South African companies, gain hands-on experience, and build your portfolio through bite-sized projects that fit your schedule.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="primary-button" onclick="showPage('internships')">
+                            Explore Opportunities
+                        </button>
+                        <button class="secondary-button" onclick="showPage('signup')">
+                            Join Waitlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is MicroIntern Section -->
+        <section class="what-is-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">What is MicroIntern?</h2>
+                    <p class="section-subtitle">
+                        MicroIntern bridges the gap between learning and professional experience by offering short-term, project-based internships that help junior developers build real-world skills and portfolios.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon briefcase">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Real Projects</h3>
+                        <p class="feature-description">
+                            Work on actual business problems with real South African companies, not just practice projects.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon clock">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12,6 12,12 16,14"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Flexible Timeline</h3>
+                        <p class="feature-description">
+                            Projects range from a few days to a few weeks, fitting around your schedule.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon money">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Get Paid</h3>
+                        <p class="feature-description">
+                            Earn money while gaining experience and building your professional network.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">How it Works</h2>
+                    <p class="section-subtitle">
+                        Getting started with MicroIntern is simple and straightforward
+                    </p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Browse & Apply</h3>
+                        <p class="step-description">
+                            Explore available micro-internships that match your skills and interests. Apply with your profile and portfolio.
+                        </p>
+                    </div>
+                    <div class="step-arrow">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Get Matched</h3>
+                        <p class="step-description">
+                            Companies review applications and select candidates. You'll be notified if you're chosen for the project.
+                        </p>
+                    </div>
+                    <div class="step-arrow">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Complete & Earn</h3>
+                        <p class="step-description">
+                            Work on the project, get mentorship, and earn money while building your professional portfolio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Different Section -->
+        <section class="why-different">
+            <div class="container">
+                <div class="why-different-content">
+                    <div class="why-different-text">
+                        <h2 class="section-title">Why MicroIntern is Different</h2>
+                        <p class="section-subtitle">
+                            Traditional internships are hard to get and often don't provide real experience. MicroIntern changes that.
+                        </p>
+                        <div class="benefits-list">
+                            <div class="benefit">
+                                <div class="benefit-icon"></div>
+                                <div>
+                                    <h3 class="benefit-title">No Competition for Long-term Spots</h3>
+                                    <p class="benefit-description">Skip the competitive application process for traditional internships.</p>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <div class="benefit-icon"></div>
+                                <div>
+                                    <h3 class="benefit-title">Immediate Value Creation</h3>
+                                    <p class="benefit-description">Start contributing to real projects from day one, not after months of onboarding.</p>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <div class="benefit-icon"></div>
+                                <div>
+                                    <h3 class="benefit-title">Build Diverse Portfolio</h3>
+                                    <p class="benefit-description">Work with multiple companies and technologies instead of being stuck in one role.</p>
+                                </div>
+                            </div>
+                            <div class="benefit">
+                                <div class="benefit-icon"></div>
+                                <div>
+                                    <h3 class="benefit-title">Perfect for Bootcamp Grads</h3>
+                                    <p class="benefit-description">Bridge the gap between learning and full-time employment with practical experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Available Projects</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">1000+</div>
+                                <div class="stat-label">Junior Developers</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">95%</div>
+                                <div class="stat-label">Success Rate</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Average Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Launch Your Tech Career?</h2>
+                    <p class="cta-subtitle">
+                        Join thousands of junior developers who are building their futures one micro-internship at a time.
+                    </p>
+                    <div class="cta-buttons">
+                        <button class="cta-primary" onclick="showPage('signup')">
+                            Join Waitlist
+                        </button>
+                        <button class="cta-secondary" onclick="showPage('internships')">
+                            Browse Opportunities
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Internships Page -->
+    <div id="internshipsPage" class="page">
+        <section class="internships-header">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Explore Micro-Internships</h1>
+                    <p class="page-subtitle">
+                        Discover exciting opportunities to gain real-world experience and build your portfolio
+                    </p>
+                </div>
+
+                <!-- Filter -->
+                <div class="filter-section">
+                    <div class="filter-buttons" id="filterButtons">
+                        <button class="filter-btn active" onclick="filterInternships('')">All Skills</button>
+                        <button class="filter-btn" onclick="filterInternships('React')">React</button>
+                        <button class="filter-btn" onclick="filterInternships('JavaScript')">JavaScript</button>
+                        <button class="filter-btn" onclick="filterInternships('Python')">Python</button>
+                        <button class="filter-btn" onclick="filterInternships('CSS')">CSS</button>
+                        <button class="filter-btn" onclick="filterInternships('PHP')">PHP</button>
+                        <button class="filter-btn" onclick="filterInternships('Testing')">Testing</button>
+                        <button class="filter-btn" onclick="filterInternships('SQL')">SQL</button>
+                        <button class="filter-btn" onclick="filterInternships('UI/UX')">UI/UX</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="internships-grid-section">
+            <div class="container">
+                <div class="internships-grid" id="internshipsGrid">
+                    <!-- Internships will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signupPage" class="page">
+        <section class="signup-section">
+            <div class="container">
+                <div class="signup-container">
+                    <div class="signup-header">
+                        <h1 class="signup-title">Join the Waitlist</h1>
+                        <p class="signup-subtitle">
+                            Be the first to know when MicroIntern launches and start building your tech career.
+                        </p>
+                    </div>
+
+                    <div class="signup-form-container">
+                        <form class="signup-form" id="signupForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="skills" class="form-label">Skills (comma-separated)</label>
+                                <input type="text" id="skills" name="skills" class="form-input" placeholder="e.g., React, Python, JavaScript, UI/UX" required>
+                            </div>
+
+                            <button type="submit" class="form-submit">
+                                Launch Your MicroIntern Journey
+                            </button>
+                        </form>
+
+                        <div class="signup-footer">
+                            <p class="signup-footer-text">
+                                Already have an account? 
+                                <button class="signup-link" onclick="showPage('internships')">Browse Internships</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16,18 22,12 16,6"></polyline>
+                                <polyline points="8,6 2,12 8,18"></polyline>
+                            </svg>
+                        </div>
+                        <span class="brand-text">MicroIntern</span>
+                    </div>
+                    <p class="footer-description">
+                        Connecting junior developers to micro-gigs that build careers, one project at a time.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://github.com/keanuyulexar" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/keanu-yule-5b3885354/" target="_blank" rel="noopener noreferrer" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="mailto:keanu@microintern.com" class="social-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Product</h4>
+                        <ul class="footer-link-list">
+                            <li><button onclick="showPage('landing')" class="footer-link">How it Works</button></li>
+                            <li><button onclick="showPage('internships')" class="footer-link">Browse Internships</button></li>
+                            <li><button onclick="showPage('signup')" class="footer-link">Join Waitlist</button></li>
+                            <li><a href="#" class="footer-link">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-column-title">Company</h4>
+                        <ul class="footer-link-list">
+                            <li><a href="#" class="footer-link">About</a></li>
+                            <li><a href="#" class="footer-link">Blog</a></li>
+                            <li><a href="#" class="footer-link">Careers</a></li>
+                            <li><a href="#" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2025 MicroIntern. Created by <span class="creator-name">Keanu Yule</span>. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
