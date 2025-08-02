@@ -1,6 +1,13 @@
 // Theme Management
 let currentTheme = localStorage.getItem('theme') || 'light';
 
+// Make functions globally accessible
+window.showPage = showPage;
+window.toggleTheme = toggleTheme;
+window.toggleMobileMenu = toggleMobileMenu;
+window.filterInternships = filterInternships;
+window.applyToInternship = applyToInternship;
+
 function initializeTheme() {
     document.documentElement.setAttribute('data-theme', currentTheme);
 }
@@ -292,6 +299,13 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeForm();
     updateNavigation();
     
+    // Make sure functions are globally accessible
+    window.showPage = showPage;
+    window.toggleTheme = toggleTheme;
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.filterInternships = filterInternships;
+    window.applyToInternship = applyToInternship;
+    
     // Check URL hash on load
     const hash = window.location.hash.substring(1);
     if (hash && ['landing', 'internships', 'signup'].includes(hash)) {
@@ -304,21 +318,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentPage === 'internships') {
         loadInternships();
     }
-    
-    // Add click event listeners to all navigation elements
-    const navButtons = document.querySelectorAll('[onclick*="showPage"]');
-    navButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const onclickAttr = this.getAttribute('onclick');
-            if (onclickAttr) {
-                const match = onclickAttr.match(/showPage\('([^']+)'\)/);
-                if (match) {
-                    showPage(match[1]);
-                }
-            }
-        });
-    });
 });
 
 // Handle browser back/forward buttons
