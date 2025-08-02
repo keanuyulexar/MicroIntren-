@@ -32,6 +32,18 @@ function showPage(pageName) {
         if (pageName === 'internships') {
             loadInternships();
         }
+        
+        // Close mobile menu if open
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+        }
+        
+        // Update URL without page reload
+        if (history.pushState) {
+            const newUrl = pageName === 'landing' ? '/' : `/#${pageName}`;
+            history.pushState({page: pageName}, '', newUrl);
+        }
     }
 }
 
@@ -39,8 +51,9 @@ function updateNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if ((link.textContent === 'Home' && currentPage === 'landing') ||
-            (link.textContent === 'Internships' && currentPage === 'internships')) {
+        const linkText = link.textContent.trim();
+        if ((linkText === 'Home' && currentPage === 'landing') ||
+            (linkText === 'Internships' && currentPage === 'internships')) {
             link.classList.add('active');
         }
     });
@@ -279,16 +292,46 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeForm();
     updateNavigation();
     
+    // Check URL hash on load
+    const hash = window.location.hash.substring(1);
+    if (hash && ['landing', 'internships', 'signup'].includes(hash)) {
+        showPage(hash);
+    } else {
+        showPage('landing');
+    }
+    
     // Load internships if we're on that page
     if (currentPage === 'internships') {
         loadInternships();
     }
+    
+    // Add click event listeners to all navigation elements
+    const navButtons = document.querySelectorAll('[onclick*="showPage"]');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const onclickAttr = this.getAttribute('onclick');
+            if (onclickAttr) {
+                const match = onclickAttr.match(/showPage\('([^']+)'\)/);
+                if (match) {
+                    showPage(match[1]);
+                }
+            }
+        });
+    });
 });
 
 // Handle browser back/forward buttons
 window.addEventListener('popstate', function(e) {
     if (e.state && e.state.page) {
         showPage(e.state.page);
+    } else {
+        const hash = window.location.hash.substring(1);
+        if (hash && ['landing', 'internships', 'signup'].includes(hash)) {
+            showPage(hash);
+        } else {
+            showPage('landing');
+        }
     }
 });
 
