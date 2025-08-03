@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MicroIntern - Kickstart Your Tech Career</title>
-    <meta name="description" content="Connect with real companies, gain hands-on experience, and build your portfolio through bite-sized micro-internships. Perfect for junior developers and bootcamp graduates.">
-    <meta name="keywords" content="micro-internships, junior developers, tech careers, bootcamp graduates, freelance projects, portfolio building">
+    <meta name="description" content="Connect with real South African companies, gain hands-on experience, and build your portfolio through bite-sized micro-internships.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,9 +22,9 @@
             </div>
             
             <div class="nav-menu">
-                <button class="nav-link" onclick="showPage('landing')">Home</button>
-                <button class="nav-link" onclick="showPage('internships')">Internships</button>
-                <button class="theme-toggle" onclick="toggleTheme()">
+                <button class="nav-link" data-page="home">Home</button>
+                <button class="nav-link" data-page="internships">Internships</button>
+                <button class="theme-toggle" id="themeToggle">
                     <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -41,11 +40,11 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                <button class="cta-button" onclick="showPage('signup')">Get Started</button>
+                <button class="cta-button" data-page="signup">Get Started</button>
             </div>
 
             <div class="mobile-menu-toggle">
-                <button class="theme-toggle mobile" onclick="toggleTheme()">
+                <button class="theme-toggle mobile" id="mobileThemeToggle">
                     <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -61,7 +60,7 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                <button class="hamburger" onclick="toggleMobileMenu()">
+                <button class="hamburger" id="hamburgerBtn">
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -70,14 +69,14 @@
         </div>
 
         <div class="mobile-menu" id="mobileMenu">
-            <button class="mobile-nav-link" onclick="showPage('landing'); toggleMobileMenu()">Home</button>
-            <button class="mobile-nav-link" onclick="showPage('internships'); toggleMobileMenu()">Internships</button>
-            <button class="mobile-cta-button" onclick="showPage('signup'); toggleMobileMenu()">Get Started</button>
+            <button class="mobile-nav-link" data-page="home">Home</button>
+            <button class="mobile-nav-link" data-page="internships">Internships</button>
+            <button class="mobile-cta-button" data-page="signup">Get Started</button>
         </div>
     </nav>
 
-    <!-- Landing Page -->
-    <div id="landingPage" class="page active">
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
@@ -90,10 +89,10 @@
                         Connect with real South African companies, gain hands-on experience, and build your portfolio through bite-sized projects that fit your schedule.
                     </p>
                     <div class="hero-buttons">
-                        <button class="primary-button" onclick="showPage('internships')">
+                        <button class="primary-button" data-page="internships">
                             Explore Opportunities
                         </button>
-                        <button class="secondary-button" onclick="showPage('signup')">
+                        <button class="secondary-button" data-page="signup">
                             Join Waitlist
                         </button>
                     </div>
@@ -270,10 +269,10 @@
                         Join thousands of junior developers who are building their futures one micro-internship at a time.
                     </p>
                     <div class="cta-buttons">
-                        <button class="cta-primary" onclick="showPage('signup')">
+                        <button class="cta-primary" data-page="signup">
                             Join Waitlist
                         </button>
-                        <button class="cta-secondary" onclick="showPage('internships')">
+                        <button class="cta-secondary" data-page="internships">
                             Browse Opportunities
                         </button>
                     </div>
@@ -296,15 +295,15 @@
                 <!-- Filter -->
                 <div class="filter-section">
                     <div class="filter-buttons" id="filterButtons">
-                        <button class="filter-btn active" onclick="filterInternships('')">All Skills</button>
-                        <button class="filter-btn" onclick="filterInternships('React')">React</button>
-                        <button class="filter-btn" onclick="filterInternships('JavaScript')">JavaScript</button>
-                        <button class="filter-btn" onclick="filterInternships('Python')">Python</button>
-                        <button class="filter-btn" onclick="filterInternships('CSS')">CSS</button>
-                        <button class="filter-btn" onclick="filterInternships('PHP')">PHP</button>
-                        <button class="filter-btn" onclick="filterInternships('Testing')">Testing</button>
-                        <button class="filter-btn" onclick="filterInternships('SQL')">SQL</button>
-                        <button class="filter-btn" onclick="filterInternships('UI/UX')">UI/UX</button>
+                        <button class="filter-btn active" data-filter="">All Skills</button>
+                        <button class="filter-btn" data-filter="React">React</button>
+                        <button class="filter-btn" data-filter="JavaScript">JavaScript</button>
+                        <button class="filter-btn" data-filter="Python">Python</button>
+                        <button class="filter-btn" data-filter="CSS">CSS</button>
+                        <button class="filter-btn" data-filter="PHP">PHP</button>
+                        <button class="filter-btn" data-filter="Testing">Testing</button>
+                        <button class="filter-btn" data-filter="SQL">SQL</button>
+                        <button class="filter-btn" data-filter="UI/UX">UI/UX</button>
                     </div>
                 </div>
             </div>
@@ -356,7 +355,7 @@
                         <div class="signup-footer">
                             <p class="signup-footer-text">
                                 Already have an account? 
-                                <button class="signup-link" onclick="showPage('internships')">Browse Internships</button>
+                                <button class="signup-link" data-page="internships">Browse Internships</button>
                             </p>
                         </div>
                     </div>
@@ -407,9 +406,9 @@
                     <div class="footer-column">
                         <h4 class="footer-column-title">Product</h4>
                         <ul class="footer-link-list">
-                            <li><button onclick="showPage('landing')" class="footer-link">How it Works</button></li>
-                            <li><button onclick="showPage('internships')" class="footer-link">Browse Internships</button></li>
-                            <li><button onclick="showPage('signup')" class="footer-link">Join Waitlist</button></li>
+                            <li><button data-page="home" class="footer-link">How it Works</button></li>
+                            <li><button data-page="internships" class="footer-link">Browse Internships</button></li>
+                            <li><button data-page="signup" class="footer-link">Join Waitlist</button></li>
                             <li><a href="#" class="footer-link">Pricing</a></li>
                         </ul>
                     </div>

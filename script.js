@@ -1,78 +1,10 @@
 // Theme Management
 let currentTheme = localStorage.getItem('theme') || 'light';
 
-// Make functions globally accessible
-window.showPage = showPage;
-window.toggleTheme = toggleTheme;
-window.toggleMobileMenu = toggleMobileMenu;
-window.filterInternships = filterInternships;
-window.applyToInternship = applyToInternship;
-
-function initializeTheme() {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-}
-
-function toggleTheme() {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
-}
-
 // Page Management
-let currentPage = 'landing';
+let currentPage = 'home';
 
-function showPage(pageName) {
-    // Hide all pages
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => page.classList.remove('active'));
-    
-    // Show selected page
-    const targetPage = document.getElementById(pageName + 'Page');
-    if (targetPage) {
-        targetPage.classList.add('active');
-        currentPage = pageName;
-        
-        // Update navigation active states
-        updateNavigation();
-        
-        // Load page-specific content
-        if (pageName === 'internships') {
-            loadInternships();
-        }
-        
-        // Close mobile menu if open
-        const mobileMenu = document.getElementById('mobileMenu');
-        if (mobileMenu) {
-            mobileMenu.classList.remove('active');
-        }
-        
-        // Update URL without page reload
-        if (history.pushState) {
-            const newUrl = pageName === 'landing' ? '/' : `/#${pageName}`;
-            history.pushState({page: pageName}, '', newUrl);
-        }
-    }
-}
-
-function updateNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        const linkText = link.textContent.trim();
-        if ((linkText === 'Home' && currentPage === 'landing') ||
-            (linkText === 'Internships' && currentPage === 'internships')) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Mobile Menu Management
-function toggleMobileMenu() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.classList.toggle('active');
-}
-
-// Mock Data
+// Mock Data - South African internships with Rand pricing
 const mockInternships = [
     {
         id: 1,
@@ -150,7 +82,71 @@ const mockInternships = [
 
 let currentFilter = '';
 
-// Internships Management
+// Initialize theme
+function initializeTheme() {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+}
+
+// Toggle theme
+function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('theme', currentTheme);
+}
+
+// Show page
+function showPage(pageName) {
+    // Hide all pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+    
+    // Show selected page
+    const targetPage = document.getElementById(pageName + 'Page');
+    if (targetPage) {
+        targetPage.classList.add('active');
+        currentPage = pageName;
+        
+        // Update navigation active states
+        updateNavigation();
+        
+        // Load page-specific content
+        if (pageName === 'internships') {
+            loadInternships();
+        }
+        
+        // Close mobile menu if open
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+        }
+        
+        // Update URL without page reload
+        if (history.pushState) {
+            const newUrl = pageName === 'home' ? '/' : `/#${pageName}`;
+            history.pushState({page: pageName}, '', newUrl);
+        }
+    }
+}
+
+// Update navigation active states
+function updateNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkPage = link.getAttribute('data-page');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.classList.toggle('active');
+}
+
+// Load internships
 function loadInternships() {
     const grid = document.getElementById('internshipsGrid');
     if (!grid) return;
@@ -217,7 +213,7 @@ function loadInternships() {
                 </div>
             </div>
             
-            <button class="apply-button" onclick="applyToInternship(${internship.id})">
+            <button class="apply-button" data-internship-id="${internship.id}">
                 Apply Now
             </button>
         </div>
@@ -231,8 +227,18 @@ function loadInternships() {
             </div>
         `;
     }
+    
+    // Add event listeners to apply buttons
+    const applyButtons = grid.querySelectorAll('.apply-button');
+    applyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const internshipId = parseInt(this.getAttribute('data-internship-id'));
+            applyToInternship(internshipId);
+        });
+    });
 }
 
+// Filter internships
 function filterInternships(skill) {
     currentFilter = skill;
     
@@ -240,8 +246,8 @@ function filterInternships(skill) {
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(btn => {
         btn.classList.remove('active');
-        if ((skill === '' && btn.textContent === 'All Skills') || 
-            (skill !== '' && btn.textContent === skill)) {
+        const btnFilter = btn.getAttribute('data-filter');
+        if (btnFilter === skill) {
             btn.classList.add('active');
         }
     });
@@ -250,6 +256,7 @@ function filterInternships(skill) {
     loadInternships();
 }
 
+// Apply to internship
 function applyToInternship(id) {
     const internship = mockInternships.find(i => i.id === id);
     if (internship) {
@@ -257,14 +264,7 @@ function applyToInternship(id) {
     }
 }
 
-// Form Management
-function initializeForm() {
-    const form = document.getElementById('signupForm');
-    if (form) {
-        form.addEventListener('submit', handleFormSubmit);
-    }
-}
-
+// Handle form submission
 function handleFormSubmit(e) {
     e.preventDefault();
     
@@ -282,37 +282,57 @@ function handleFormSubmit(e) {
     e.target.reset();
 }
 
-// Smooth scrolling for anchor links
-function smoothScroll(target) {
-    const element = document.querySelector(target);
-    if (element) {
-        element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    }
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme
     initializeTheme();
-    initializeForm();
-    updateNavigation();
     
-    // Make sure functions are globally accessible
-    window.showPage = showPage;
-    window.toggleTheme = toggleTheme;
-    window.toggleMobileMenu = toggleMobileMenu;
-    window.filterInternships = filterInternships;
-    window.applyToInternship = applyToInternship;
+    // Add event listeners for navigation
+    const navButtons = document.querySelectorAll('[data-page]');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const page = this.getAttribute('data-page');
+            showPage(page);
+        });
+    });
+    
+    // Add event listeners for theme toggles
+    const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+    themeToggleButtons.forEach(button => {
+        button.addEventListener('click', toggleTheme);
+    });
+    
+    // Add event listener for hamburger menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+    }
+    
+    // Add event listeners for filter buttons
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            filterInternships(filter);
+        });
+    });
+    
+    // Add event listener for signup form
+    const signupForm = document.getElementById('signupForm');
+    if (signupForm) {
+        signupForm.addEventListener('submit', handleFormSubmit);
+    }
     
     // Check URL hash on load
     const hash = window.location.hash.substring(1);
-    if (hash && ['landing', 'internships', 'signup'].includes(hash)) {
+    if (hash && ['home', 'internships', 'signup'].includes(hash)) {
         showPage(hash);
     } else {
-        showPage('landing');
+        showPage('home');
     }
+    
+    // Update navigation
+    updateNavigation();
     
     // Load internships if we're on that page
     if (currentPage === 'internships') {
@@ -326,15 +346,15 @@ window.addEventListener('popstate', function(e) {
         showPage(e.state.page);
     } else {
         const hash = window.location.hash.substring(1);
-        if (hash && ['landing', 'internships', 'signup'].includes(hash)) {
+        if (hash && ['home', 'internships', 'signup'].includes(hash)) {
             showPage(hash);
         } else {
-            showPage('landing');
+            showPage('home');
         }
     }
 });
 
-// Add some interactive animations
+// Add interactive animations
 function addInteractiveAnimations() {
     // Add hover effects to cards
     const cards = document.querySelectorAll('.feature-card, .internship-card');
