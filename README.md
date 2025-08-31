@@ -1,6 +1,3 @@
-Here’s a clean, professional, but also approachable **README.md** you can drop straight into your **MicroIntern** repo 👇
-
----
 
 # MicroIntern 🚀
 
