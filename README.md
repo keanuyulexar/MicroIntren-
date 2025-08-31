@@ -63,6 +63,3 @@ Feel free to **fork the repo** and submit a PR.
 
 This project is under the **MIT License** – free to use, modify, and distribute.
 
----
-
-Would you like me to make this **more recruiter-friendly** (showcasing your skills and what you’ve learned) or keep it **more project-focused** (like a community open-source repo)?
